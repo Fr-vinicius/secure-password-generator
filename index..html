@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gerador de Senhas Seguras</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 50px;
+    }
+    .container {
+      max-width: 400px;
+      margin: auto;
+    }
+    input[type="checkbox"] {
+      margin-right: 10px;
+    }
+    #password {
+      font-size: 1.5rem;
+      margin: 20px 0;
+      word-break: break-all;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 1rem;
+      margin: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Gerador de Senhas Seguras</h1>
+    <label>
+      Comprimento:
+      <input type="number" id="length" min="8" max="32" value="12">
+    </label>
+    <br>
+    <label>
+      <input type="checkbox" id="include-lowercase" checked>
+      Letras Minúsculas
+    </label>
+    <br>
+    <label>
+      <input type="checkbox" id="include-uppercase" checked>
+      Letras Maiúsculas
+    </label>
+    <br>
+    <label>
+      <input type="checkbox" id="include-numbers" checked>
+      Números
+    </label>
+    <br>
+    <label>
+      <input type="checkbox" id="include-symbols" checked>
+      Símbolos
+    </label>
+    <br>
+    <div id="password"></div>
+    <button id="generate">Gerar Senha</button>
+    <button id="copy">Copiar</button>
+  </div>
+
+  <script>
+    const passwordElement = document.getElementById('password');
+    const lengthElement = document.getElementById('length');
+    const includeLowercaseElement = document.getElementById('include-lowercase');
+    const includeUppercaseElement = document.getElementById('include-uppercase');
+    const includeNumbersElement = document.getElementById('include-numbers');
+    const includeSymbolsElement = document.getElementById('include-symbols');
+    const generateButton = document.getElementById('generate');
+    const copyButton = document.getElementById('copy');
+
+    const LOWERCASE = 'abcdefghijklmnopqrstuvwxyz';
+    const UPPERCASE = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    const NUMBERS = '0123456789';
+    const SYMBOLS = '!@#$%^&*()_+[]{}|;:,.<>?';
+
+    function generatePassword(length, includeLowercase, includeUppercase, includeNumbers, includeSymbols) {
+      let characterPool = '';
+      if (includeLowercase) characterPool += LOWERCASE;
+      if (includeUppercase) characterPool += UPPERCASE;
+      if (includeNumbers) characterPool += NUMBERS;
+      if (includeSymbols) characterPool += SYMBOLS;
+
+      if (characterPool === '') return 'Selecione pelo menos uma opção!';
+
+      let password = '';
+      for (let i = 0; i < length; i++) {
+        const randomIndex = Math.floor(Math.random() * characterPool.length);
+        password += characterPool[randomIndex];
+      }
+      return password;
+    }
+
+    generateButton.addEventListener('click', () => {
+      const length = parseInt(lengthElement.value);
+      const includeLowercase = includeLowercaseElement.checked;
+      const includeUppercase = includeUppercaseElement.checked;
+      const includeNumbers = includeNumbersElement.checked;
+      const includeSymbols = includeSymbolsElement.checked;
+
+      const password = generatePassword(length, includeLowercase, includeUppercase, includeNumbers, includeSymbols);
+      passwordElement.textContent = password;
+    });
+
+    copyButton.addEventListener('click', () => {
+      if (passwordElement.textContent === '') {
+        alert('Nenhuma senha para copiar!');
+        return;
+      }
+      navigator.clipboard.writeText(passwordElement.textContent).then(() => {
+        alert('Senha copiada para a área de transferência!');
+      });
+    });
+  </script>
+</body>
+</html>
