@@ -33,16 +33,16 @@ O **Gerador de Senhas Seguras** ajuda os usuários a criar senhas fortes e perso
 1. Clone o repositório:
    `git clone https://github.com/seu-usuario/gerador-senhas.git`
 
-2. Abra o arquivo `index.html` no navegador.
 
 ---
 
 ## Uso
 
-1. Escolha o comprimento da senha.  
-2. Selecione os tipos de caracteres (letras maiúsculas, minúsculas, números e símbolos).  
-3. Clique em "Gerar Senha" para criar a senha.  
-4. Utilize o botão "Copiar" para copiar a senha para a área de transferência.
+1. Abra o arquivo `index.html` no navegador.
+2. Escolha o comprimento da senha.  
+3. Selecione os tipos de caracteres (letras maiúsculas, minúsculas, números e símbolos).  
+4. Clique em "Gerar Senha" para criar a senha.  
+5. Utilize o botão "Copiar" para copiar a senha para a área de transferência.
 
 ---
 
